@@ -1,0 +1,29 @@
+@import '~antd/dist/antd.css';
+/* @import "~antd/dist/antd.less";   // 引入官方提供的 less 样式入口文件
+@import "your-theme-file.less";   // 用于覆盖上面定义的变量 */
+
+
+.App-logo {
+    animation: App-logo-spin infinite 10s linear;
+    height: 60px;
+}
+
+@keyframes App-logo-spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+.logo {
+    height: 32px;
+    background: #333;
+    border-radius: 6px;
+    margin: 16px;
+}
+
+.ant-layout-sider-collapsed .anticon {
+    font-size: 16px;
+}
+
+.ant-layout-sider-collapsed .nav-text {
+    display: none;
+}
