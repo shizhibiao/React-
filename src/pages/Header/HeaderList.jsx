@@ -1,16 +1,9 @@
 import React from 'react';
-
+import CollectionCreateForm from './UserForm.jsx'
 import './index.css'
-import { Table, Row, Col, DatePicker, Button, Modal, Form, Input, Select, notification   } from 'antd';
-
-const FormItem = Form.Item;
+import { Table, Row, Col, DatePicker, Button, Modal, notification   } from 'antd';
+// 时间控件
 const { RangePicker } = DatePicker;
-const Option = Select.Option;
-
-
-// 下拉菜单数据
-const invTypeData = ['挂号', '门诊', '住院', '体检'];
-const purchUserData = ['收费员1', '收费员2', '收费员3', '收费员4', '收费员5']
 
 const columns = [{
     title: '日期',
@@ -47,92 +40,6 @@ const columns = [{
     dataIndex: 'handle',
   }];
 
-const CollectionCreateForm = Form.create()(
-  // eslint-disable-next-line
-  class extends React.Component {
-    render() {
-      const {
-        visible, onCancel, onCreate, form,
-      } = this.props;
-      const { getFieldDecorator } = form;
-      const formItemLayout = {
-        labelCol: {span: 4},
-        wrapperCol: {span: 20},
-      };
-      return (
-        <Modal
-          visible={visible}
-          title="新增"
-          okText="确定"
-          onCancel={onCancel}
-          onOk={onCreate}
-        >
-          <Form layout="vertical">
-            <FormItem label="票据类型" {...formItemLayout}>
-              {getFieldDecorator('invType', {
-                rules: [{ required: true, message: '票据类型不能为空' }],
-              })(
-                <Select
-                  style={{ width: '100%' }}
-                  onChange={this.handleProvinceChange}
-                >
-                  {invTypeData.map(province => <Option key={province}>{province}</Option>)}
-                </Select>
-              )}
-            </FormItem>
-            <FormItem label="购入人" {...formItemLayout}>
-              {getFieldDecorator('purchUser', {
-                rules: [{ required: true, message: '购入人不能为空' }],
-              })(
-                <Select
-                  style={{ width: '100%' }}
-                  onChange={this.handleProvinceChange}
-                >
-                  {purchUserData.map(province => <Option key={province}>{province}</Option>)}
-                </Select>
-              )}
-            </FormItem>
-            <FormItem label="前缀" {...formItemLayout}>
-              {getFieldDecorator('prefix', {
-                rules: [{ required: true, message: '前缀不能为空' }],
-              })(
-                <Input />
-              )}
-            </FormItem>
-            <FormItem label="开始号码" {...formItemLayout}>
-              {getFieldDecorator('stNo', {
-                rules: [{ required: true, message: '开始号码不能为空' }],
-              })(
-                <Input />
-              )}
-            </FormItem>
-            <FormItem label="结束号码" {...formItemLayout}>
-              {getFieldDecorator('endNo', {
-                rules: [{ required: true, message: '结束号码不能为空' }],
-              })(
-                <Input />
-              )}
-            </FormItem>
-            {/* <FormItem label="Description">
-              {getFieldDecorator('description')(<Input type="textarea" />)}
-            </FormItem>
-            <FormItem className="collection-create-form_last-form-item">
-              {getFieldDecorator('modifier', {
-                initialValue: 'public',
-              })(
-                <Radio.Group>
-                  <Radio value="public">Public</Radio>
-                  <Radio value="private">Private</Radio>
-                </Radio.Group>
-              )}
-            </FormItem> */}
-          </Form>
-        </Modal>
-      );
-    }
-  }
-);
-
 export default class HeaderList extends React.Component {
       state = {
         selectedRowKeys: [], // Check here to configure the default column
@@ -142,19 +49,19 @@ export default class HeaderList extends React.Component {
         visible: false,
         confirmDirty: false,
         autoCompleteResult: [],
-        rowData: {}
+        rowData: [],
+        // 保存点击的状态(新增与编辑)
+        type: ''
       };
-      
       onSelectChange = (selectedRowKeys, selectedRows) => {
         this.setState({ selectedRowKeys });
         // 选中后的行数据
-        // console.log(selectedRows[0])
-        this.setState({rowData: selectedRows[0]})
+        this.setState({rowData: selectedRows});
       }
       // 挂载完成
       componentDidMount(){
         // 初始化数据
-        // this.getData()
+        this.getData()
       }
 
       // 查询
@@ -186,79 +93,113 @@ export default class HeaderList extends React.Component {
           visible: true,
         });
       }
-      
-      // 添加
-      handleOk = (e) => {
-        // console.log(e);
-        this.setState({
-          visible: false,
-        });
-      }
 
       // 取消
       handleCancel = (e) => {
-        // console.log(e);
+        let {type} = this.state;
+        // 如果是编辑时则需重置输入框
+        if (type === 'compile') {
+          const form = this.formRef.props.form;
+          form.resetFields(); // 重置一组输入控件的值
+        }
+        // 如果选中一个列，则清空数据
+        this.setState({rowData: []})
+        // 取消选中
+        this.setState({selectedRowKeys: []});
         this.setState({
           visible: false,
         });
+
+        
       }
       // 确定
       handleCreate = () => {
+        let {type} = this.state;
         const form = this.formRef.props.form;
-        form.validateFields((err, values) => {
-          if (err) {
-            return;
-          }
-          let obj = {};
-          obj.code = 1002;
-          obj.results = [];
-          obj.results.push(values)
-          // fetch axios
-          fetch('http://172.18.13.23:57772/csp/user/testrest/Mutiple1', {
-            method: 'post',
-            mode: 'cors',
-            headers: {
-              'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(obj)
-          })
-            .then(res => res.json())  ///解析json数据
-            .then(result => {
-              if (result.result && result.result[0].errcmsg === '成功') {
-                notification.success({
-                  // 主标题
-                  message: '新增成功',
-                  // 子标题
-                  // description: 'This is the content of the notification. This is the content of the notification. This is the content of the notification.',
-                });
-                this.setState({ visible: false });
-                this.getData()
-              }
-              
+        if (type === 'add') {
+          form.validateFields((err, values) => {
+            if (err) {
+              return;
+            }
+            let obj = {};
+            obj.code = 1002;
+            obj.results = [];
+            obj.results.push(values)
+            // fetch axios
+            fetch('http://172.18.13.23:57772/csp/user/testrest/Mutiple1', {
+              method: 'post',
+              mode: 'cors',
+              headers: {
+                'Content-Type': 'application/json'
+              },
+              body: JSON.stringify(obj)
             })
-            .catch(e => console.log('错误:', e))   ///请求出错
-          form.resetFields();
-        });
+              .then(res => res.json())  ///解析json数据
+              .then(result => {
+                if (result.result && result.result[0].errcmsg === '成功') {
+                  notification.success({
+                    // 主标题
+                    message: '新增成功',
+                    // 子标题
+                    // description: 'This is the content of the notification. This is the content of the notification. This is the content of the notification.',
+                  });
+                  // 关闭弹框
+                  this.handleCancel();
+                  // 刷新页面数据
+                  this.getData()
+                }
+                
+              })
+              .catch(e => console.log('错误:', e))   ///请求出错
+          });
+        } else if (type === 'compile') {
+          console.log('编辑中')
+        }
       }
     
       saveFormRef = (formRef) => {
         this.formRef = formRef;
       }
+      // 添加
+      AddAction() {
+        // type
+        this.setState({type: 'add'})
+        // 如果选中一个列，则清空数据
+        this.setState({rowData: []})
+        // 取消选中
+        this.setState({selectedRowKeys: []});
+        // 显示弹出框
+        this.showModal();
+      }
       
       // 修改
       compileAction() {
-        console.log('111')
-        // const form = this.formRef.props.form;
-        // form.getFieldDecorator((err, value) => {})
+        if (this.state.rowData.length >= 1) {
+          // 保存修改的状态
+          this.setState({type: 'compile'})
+          // 显示弹出框
+          this.showModal();
+        } else {
+          Modal.info({
+            title: '信息',
+            content: '请选择一个需要操作的数据'
+          })
+        }
+        
       } 
 
       render() {
         const { selectedRowKeys, size } = this.state;
         const rowSelection = {
-          selectedRowKeys,
-          onChange: this.onSelectChange,
+          // 去掉『全选』『反选』两个默认选项
           hideDefaultSelections: true,
-          onSelection: this.onSelection,
+          // 指定选中项的 key 数组，需要和 onChange 进行配合
+          selectedRowKeys,
+          // 选中项发生变化时的回调
+          onChange: this.onSelectChange,
+          // 用户手动选择/取消选择所有行的回调
+          onSelect: this.onSelectAction,
+          // 多选/单选，checkbox or radio
           type: 'radio'
         };
         return (
@@ -269,7 +210,7 @@ export default class HeaderList extends React.Component {
                         日期：<RangePicker size={size} />
                     </Col>
                     <Col span={8}>
-                        <Button type="primary" className="margiRight20" onClick={this.showModal}>添加</Button>
+                        <Button type="primary" className="margiRight20" onClick={this.AddAction.bind(this)}>添加</Button>
                         <Button type="primary" className="margiRight20" onClick={this.compileAction.bind(this)}>修改</Button>
                         <Button type="primary" className="margiRight20">删除</Button>
                         <Button type="primary" className="margiRight20" onClick={this.getData.bind(this)}>查询</Button>
@@ -288,6 +229,7 @@ export default class HeaderList extends React.Component {
                       visible={this.state.visible}
                       onCancel={this.handleCancel}
                       onCreate={this.handleCreate}
+                      userInfo={this.state.rowData[0]}
                     />
                 </div>
             </div>

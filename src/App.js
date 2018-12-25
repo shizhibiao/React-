@@ -8,9 +8,9 @@ import Breadcrumbs from './breadcrumbs/index.jsx'
 import Routers from './routers/index.jsx';
 
 
-import { Layout, Icon } from 'antd';
+import { Layout, Icon, Avatar, Badge } from 'antd';
 import 'antd/dist/antd.css';
-import logo from './logo.svg';
+// import logo from './logo.svg';
 import './App.css'
 const { Header, Content, Footer, Sider } = Layout;
 
@@ -53,14 +53,20 @@ class App extends Component {
                                 />
                             </span>
                             <span style={{color:'#fff', paddingLeft:'2%', fontSize:'1.4em'}}>新园素后台管理系统</span>
-                            <span style={{color:'#fff', float:'right', paddingRight:'1%'}}>
-                                <img src={logo} className="App-logo" alt="logo" />
+                            <span style={{color:'#fff', float:'right', paddingRight:'3%'}}>
+                                <Badge count={3} offset={[20, -16]}>
+                                    <Icon type="message" size="large" style={{fontSize: 36,position: 'absolute', top: -21, left: -10}} />
+                                </Badge>
+                                
+                                <Avatar size="large" icon="user" style={{marginLeft: 46}} />
+                                {/* <img src={logo} className="App-logo" alt="logo" /> */}
                             </span>
                         </Header>
-                        <Content style={{ margin: '0 16px' }}>
+                        <Content style={{ margin: '0 16px'}}>
                             {/* 内容区上的小导航栏 */}
                             <Breadcrumbs />
-                            <div style={{ background: '#fff', minHeight: 780 }}>
+                            {/* 内容区域出现滚动条：height: 780, overflowY: 'auto' */}
+                            <div style={{ background: '#fff', height: 780, overflowY: 'auto', position: 'relative'}}>
                                 {/* 内容区域的路由 */}
                                 <Routers />
                             </div>
