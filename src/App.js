@@ -73,7 +73,7 @@ class App extends Component {
                         </Content>
                         <Footer style={{ textAlign: 'center' }}>
                             {/* 尾部标题 */}
-                            Ant Design ©2018 Created by Ant UED
+                            Copyright ©2018 新元素网络科技出品
                         </Footer>
                     </Layout>
                 </Layout>
