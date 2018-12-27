@@ -3,7 +3,7 @@ import { BrowserRouter } from 'react-router-dom'
 // 左侧导航栏
 import Menus from './menus/index.jsx';
 // center上的导航小标题
-import Breadcrumbs from './breadcrumbs/index.jsx'
+import CustomBreadcrumb from './components/CustomBreadcrumb/index.jsx'
 // 页面
 import Routers from './routers/index.jsx';
 
@@ -38,13 +38,13 @@ class App extends Component {
                         collapsible
                         collapsed={this.state.collapsed}
                     >
-                        <div className="logo" />
+                        <div className="logo"></div>
                         {/* 左侧导航 */}
                         <Menus />
                     </Sider>
                     <Layout>
-                        <Header style={{ background: '# ', padding: 0 }}>
-                            <span style={{color:'#fff', paddingLeft:'2%', fontSize:'1.4em'}}>
+                        <Header style={{ background: '#fff', padding: 0 }}>
+                            <span style={{color:'#000', paddingLeft:'2%', fontSize:'1.4em'}}>
                                 <Icon
                                     className="trigger"
                                     type={this.state.collapsed ? 'menu-unfold' : 'menu-fold'}
@@ -52,8 +52,8 @@ class App extends Component {
                                     style={{cursor: 'pointer'}}
                                 />
                             </span>
-                            <span style={{color:'#fff', paddingLeft:'2%', fontSize:'1.4em'}}>新园素后台管理系统</span>
-                            <span style={{color:'#fff', float:'right', paddingRight:'3%'}}>
+                            <span style={{color:'#000', paddingLeft:'2%', fontSize:'1.4em'}}>新元素后台管理系统</span>
+                            <span style={{color:'#ccc', float:'right', paddingRight:'3%'}}>
                                 <Badge count={3} offset={[20, -16]}>
                                     <Icon type="message" size="large" style={{fontSize: 36,position: 'absolute', top: -21, left: -10}} />
                                 </Badge>
@@ -63,8 +63,8 @@ class App extends Component {
                             </span>
                         </Header>
                         <Content style={{ margin: '0 16px'}}>
-                            {/* 内容区上的小导航栏 */}
-                            <Breadcrumbs />
+                            {/* 面包屑 */}
+                            <CustomBreadcrumb arr={['显示', '表格']} />
                             {/* 内容区域出现滚动条：height: 780, overflowY: 'auto' */}
                             <div style={{ background: '#fff', height: 780, overflowY: 'auto', position: 'relative'}}>
                                 {/* 内容区域的路由 */}

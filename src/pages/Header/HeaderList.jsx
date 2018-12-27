@@ -1,7 +1,9 @@
 import React from 'react';
-import CollectionCreateForm from './UserForm.jsx'
 import './index.css'
-import { Table, Row, Col, DatePicker, Button, Modal, notification   } from 'antd';
+
+import CollectionCreateForm from './UserForm.jsx'
+
+import { Table, Row, Col, DatePicker, Button, Modal, notification } from 'antd';
 // 时间控件
 const { RangePicker } = DatePicker;
 
@@ -35,9 +37,6 @@ const columns = [{
   }, {
     title: 'Job',
     dataIndex: 'job',
-  }, {
-    title: '操作',
-    dataIndex: 'handle',
   }];
 
 export default class HeaderList extends React.Component {
@@ -202,8 +201,68 @@ export default class HeaderList extends React.Component {
           // 多选/单选，checkbox or radio
           type: 'radio'
         };
+        const listData = [
+          {
+            purchDate: '2018-08-01',
+            preFix: '_120adcd',
+            stNo: '12345',
+            endNo: '56789',
+            purchUser: '张三',
+            curNo: '10086',
+            available: '231331',
+            invtype: '安达充的撒',
+            rowid: '121122',
+            job: '啊大斗法'
+          },
+          {
+            purchDate: '2018-08-01',
+            preFix: '_120adcd',
+            stNo: '12345',
+            endNo: '56789',
+            purchUser: '张三',
+            curNo: '10086',
+            available: '231331',
+            invtype: '安达充的撒',
+            rowid: '121122',
+            job: '啊大斗法'
+          },{
+            purchDate: '2018-08-01',
+            preFix: '_120adcd',
+            stNo: '12345',
+            endNo: '56789',
+            purchUser: '张三',
+            curNo: '10086',
+            available: '231331',
+            invtype: '安达充的撒',
+            rowid: '121122',
+            job: '啊大斗法'
+          },{
+            purchDate: '2018-08-01',
+            preFix: '_120adcd',
+            stNo: '12345',
+            endNo: '56789',
+            purchUser: '张三',
+            curNo: '10086',
+            available: '231331',
+            invtype: '安达充的撒',
+            rowid: '121122',
+            job: '啊大斗法'
+          },{
+            purchDate: '2018-08-01',
+            preFix: '_120adcd',
+            stNo: '12345',
+            endNo: '56789',
+            purchUser: '张三',
+            curNo: '10086',
+            available: '231331',
+            invtype: '安达充的撒',
+            rowid: '121122',
+            job: '啊大斗法'
+          }
+        ]
         return (
             <div style={{ padding: 24 }}>
+                
                 <div className="table-operations" style={{marginBottom: '30px'}}>
                 <Row>
                     <Col span={16}>
@@ -221,7 +280,8 @@ export default class HeaderList extends React.Component {
                 <Table rowSelection={rowSelection}
                   columns={columns}
                   pagination={{pageSize: 15}}
-                  dataSource={this.state.data}
+                  // this.state.data
+                  dataSource={listData}
                   rowKey={(record, index) => `complete${record.id}${index}`} />
                 <div>
                   <CollectionCreateForm

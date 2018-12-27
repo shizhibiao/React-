@@ -39,6 +39,16 @@ const columns = [{
     });
   }
 export default class HeaderAdd extends React.Component {
+
+    constructor({history}) {
+        super()
+        this.history = history;
+    }
+
+    goBack() {
+        this.history.push('/header/list')
+    }
+
     render() {
         
         return (
@@ -162,7 +172,8 @@ export default class HeaderAdd extends React.Component {
                 </Card>
                 <Card type="inner"
                     id="marginBottom">
-                    <Button type="primary">提交</Button>
+                    <Button type="primary" className="margiRight20">提交</Button>
+                    <Button className="margiRight20" onClick={this.goBack.bind(this)}>返回</Button>
                 </Card>
             </div>
         )

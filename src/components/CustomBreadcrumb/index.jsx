@@ -1,6 +1,6 @@
 import React from 'react';
 // 全局管理数据
-import store from '../store'
+import store from '../../store'
 
 import { Breadcrumb } from 'antd';
 
@@ -12,7 +12,9 @@ export default class Breadcrumbs extends React.Component {
         // console.log(location); // 包含参数,state以及路径
 
         // console.log(match); // 包含拼接在url后面的参数
-  
+    componentDidMount() {
+      console.log(store.getState())
+    }
     render() {
         // 获取面包屑的length的长度
         let propLen = store.getState().header.breadcrumbName ? store.getState().header.breadcrumbName.length : 0
