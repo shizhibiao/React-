@@ -1,5 +1,6 @@
 import React from 'react';
 import './index.css'
+import PubSub from 'pubsub-js'
 
 import CollectionCreateForm from './UserForm.jsx'
 
@@ -52,6 +53,11 @@ export default class HeaderList extends React.Component {
         // 保存点击的状态(新增与编辑)
         type: ''
       };
+      componentWillUpdate(nextProps, nextState) {
+        if(nextState.visible === false) {
+          PubSub.publish("changeDate")
+        }
+      }
       onSelectChange = (selectedRowKeys, selectedRows) => {
         this.setState({ selectedRowKeys });
         // 选中后的行数据
@@ -109,6 +115,7 @@ export default class HeaderList extends React.Component {
           visible: false,
         });
 
+        // 当点击取消时关闭时间控件
         
       }
       // 确定
@@ -117,6 +124,7 @@ export default class HeaderList extends React.Component {
         const form = this.formRef.props.form;
         if (type === 'add') {
           form.validateFields((err, values) => {
+            console.log(values)
             if (err) {
               return;
             }
@@ -184,7 +192,6 @@ export default class HeaderList extends React.Component {
             content: '请选择一个需要操作的数据'
           })
         }
-        
       } 
 
       render() {
@@ -290,6 +297,7 @@ export default class HeaderList extends React.Component {
                       onCancel={this.handleCancel}
                       onCreate={this.handleCreate}
                       userInfo={this.state.rowData[0]}
+                      onRef={this.onRef}
                     />
                 </div>
             </div>

@@ -3,7 +3,9 @@ import HeaderAdd from '../pages/Header/HeaderAdd.jsx'
 import Nav from '../pages/Nav/index.jsx'
 import Mine from '../pages/Mine/index.jsx'
 
+
 // path：路由路径
+// breadcrumbName: 面包屑的名称
 // component：引入的组件
 
 const RouterData = [

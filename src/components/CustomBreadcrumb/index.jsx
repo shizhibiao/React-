@@ -13,7 +13,7 @@ export default class Breadcrumbs extends React.Component {
 
         // console.log(match); // 包含拼接在url后面的参数
     componentDidMount() {
-      console.log(store.getState())
+    //   console.log(store.getState())
     }
     render() {
         // 获取面包屑的length的长度

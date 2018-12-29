@@ -1,10 +1,17 @@
 import React from 'react';
-import PropTypes from 'prop-types'
+import PropTypes from 'prop-types';
 
-import { Modal, Form, Input, Select } from 'antd';
+import InputText from '../../components/InputText/index.jsx';
+import InputNumber from '../../components/InputNumber/index.jsx';
+import DateRange from '../../components/DatePicker/index.jsx';
+
+import { Modal, Form, Select } from 'antd';
 
 const FormItem = Form.Item;
 const Option = Select.Option;
+
+
+
 
 // 下拉菜单数据
 const invTypeData = ['挂号', '门诊', '住院', '体检'];
@@ -13,7 +20,6 @@ const purchUserData = ['收费员1', '收费员2', '收费员3', '收费员4', '
 const CollectionCreateForm = Form.create()(
     // eslint-disable-next-line
     class extends React.Component {
-
       componentDidMount() {
         // console.log(this.props.userInfo)
       }
@@ -66,25 +72,22 @@ const CollectionCreateForm = Form.create()(
                 <FormItem label="前缀" {...formItemLayout}>
                   {getFieldDecorator('preFix', {
                     initialValue:userInfo.preFix,
-                    rules: [{ required: true, message: '前缀不能为空' }],
                   })(
-                    <Input />
+                    <DateRange />
                   )}
                 </FormItem>
                 <FormItem label="开始号码" {...formItemLayout}>
                   {getFieldDecorator('stNo', {
                     initialValue:userInfo.stNo,
-                    rules: [{ required: true, message: '开始号码不能为空' }],
                   })(
-                    <Input />
+                    <InputText />
                   )}
                 </FormItem>
                 <FormItem label="结束号码" {...formItemLayout}>
                   {getFieldDecorator('endNo', {
                     initialValue:userInfo.endNo,
-                    rules: [{ required: true, message: '结束号码不能为空' }],
                   })(
-                    <Input />
+                    <InputNumber type="int" />
                   )}
                 </FormItem>
             </Form>

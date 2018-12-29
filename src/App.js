@@ -7,7 +7,6 @@ import CustomBreadcrumb from './components/CustomBreadcrumb/index.jsx'
 // 页面
 import Routers from './routers/index.jsx';
 
-
 import { Layout, Icon, Avatar, Badge } from 'antd';
 import 'antd/dist/antd.css';
 // import logo from './logo.svg';
@@ -28,7 +27,6 @@ class App extends Component {
             collapsed: !this.state.collapsed,
         });
     }
-
     render() {
         return (
             <BrowserRouter>

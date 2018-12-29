@@ -1,0 +1,17 @@
+.date-picker{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+.date-picker>span{
+    width: 48%;
+}
+.dataBtn{
+    border: 0;
+}
+.btnParent{
+    height: 80px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}

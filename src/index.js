@@ -11,8 +11,6 @@ import './index.css';//引入样式
 import App from './App.js';//引入自己写的组件(class)
 // import registerServiceWorker from './registerServiceWorker';
 
-
-
 ReactDOM.render(
     <LocaleProvider locale={zhCN}>
       <App />
