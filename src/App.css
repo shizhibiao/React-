@@ -27,3 +27,11 @@
 .ant-layout-sider-collapsed .nav-text {
     display: none;
 }
+
+/* 修改table的默认样式（行高） */
+.ant-table-thead > tr > th, .ant-table-tbody > tr > td{
+    padding: 10px 16px !important;
+}
+.ant-table-thead > tr, .ant-table-tbody > tr {
+    height: 45px !important;
+}

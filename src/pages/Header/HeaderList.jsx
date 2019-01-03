@@ -276,10 +276,10 @@ export default class HeaderList extends React.Component {
                         日期：<RangePicker size={size} />
                     </Col>
                     <Col span={8}>
-                        <Button type="primary" className="margiRight20" onClick={this.AddAction.bind(this)}>添加</Button>
-                        <Button type="primary" className="margiRight20" onClick={this.compileAction.bind(this)}>修改</Button>
-                        <Button type="primary" className="margiRight20">删除</Button>
-                        <Button type="primary" className="margiRight20" onClick={this.getData.bind(this)}>查询</Button>
+                        <Button type="primary" className="margiRight16" onClick={this.AddAction.bind(this)}>添加</Button>
+                        <Button type="primary" className="margiRight16" onClick={this.compileAction.bind(this)}>编辑</Button>
+                        <Button type="primary" className="margiRight16">删除</Button>
+                        <Button type="primary" className="margiRight16" onClick={this.getData.bind(this)}>查询</Button>
                         <Button type="primary">打印明细</Button>
                     </Col>
                 </Row>

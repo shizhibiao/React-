@@ -81,14 +81,13 @@ export default class DateRange extends React.Component {
         this.setState({ endOpen: open });
     }
 
-    // 点击今天
-    handleToday = ()=> {
+    // 一天前
+    oneTodayBefore = ()=> {
         if (this.state.endValue) {
-            this.onChange('startValue', Moment());
+            this.onChange('startValue', Moment(this.state.endValue).subtract(1, "days"));
             this.closeHandle()
-            
         }else {
-            this.onChange('startValue', Moment());
+            this.onChange('startValue', Moment().subtract(1, "days"));
             this.clickStartDate()
         }
     }
@@ -113,16 +112,17 @@ export default class DateRange extends React.Component {
             this.clickStartDate()
         }
     }
-    // 今天
-    endToday = () => {
+    // 一天后
+    oneDayBack = () => {
         if (this.state.startValue) {
-            this.onChange('endValue', Moment()); 
+            this.onChange('endValue', Moment(this.state.startValue).add(1, "days"));
             this.closeHandle()
         }else {
-            this.onChange('endValue', Moment());
+            this.onChange('endValue', Moment().add(1, "days"));
             this.clickEndDate()
         }
     }
+
     // 三天后
     threeDayBack = () => {
         if (this.state.startValue) {
@@ -133,6 +133,7 @@ export default class DateRange extends React.Component {
             this.clickEndDate()
         }
     }
+
     // 七天后
     oneWeekBack = () => {
         if (this.state.startValue) {
@@ -161,7 +162,7 @@ export default class DateRange extends React.Component {
                     renderExtraFooter={() => {
                         return(
                             <div className="btnParent">
-                                <Button className="dataBtn" onClick={this.handleToday}>今天</Button>
+                                <Button className="dataBtn" onClick={this.oneTodayBefore}>一天前</Button>
                                 <Button className="dataBtn" onClick={this.threeDayBefore}>三天前</Button>
                                 <Button className="dataBtn" onClick={this.oneWeekBefore}>一周前</Button>
                             </div>
@@ -181,7 +182,7 @@ export default class DateRange extends React.Component {
                     renderExtraFooter={() => {
                         return(
                             <div className="btnParent">
-                                <Button className="dataBtn" onClick={this.endToday}>今天</Button>
+                                <Button className="dataBtn" onClick={this.oneDayBack}>一天后</Button>
                                 <Button className="dataBtn" onClick={this.threeDayBack}>三天后</Button>
                                 <Button className="dataBtn" onClick={this.oneWeekBack}>一周后</Button>
                             </div>

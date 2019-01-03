@@ -1,0 +1,12 @@
+.bg-color{
+    width: 100%;
+    height: 44px;
+    line-height: 44px;
+    background-color: rgba(102, 255, 255, 0.117647058823529)
+}
+.bg-color span{
+    font-weight: 700;
+    font-size: 18px;
+    color: rgba(0, 51, 255, 0.847058823529412);
+    margin-left: 24px; 
+}

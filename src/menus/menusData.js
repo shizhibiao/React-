@@ -20,21 +20,22 @@ const MENUS_DATA = [
             {path: '/mine/add', title: '添加', icon: 'zoom-in',},
         ]
     },{
-        title: '官网',
-        icon: 'crown',
-        path: '/sub2',
+        title: '基础数据',
+        icon: 'sliders',
+        path: '/basic',
         subs: [
             {
-                title: '子官网',
-                icon: '',
-                path: '/sub2/child',
+                title: '系统资源',
+                icon: 'deployment-unit',
+                path: '/basic/system',
                 subs: [
-                    {path: '/sub2/child/add', title: '添加', icon: 'zoom-in',},
-                    {path: '/sub2/child/look', title: '查看', icon: 'zoom-in',},
+                    {path: '/basic/system/user', title: '用户', icon: 'user-delete',},
+                    {path: '/basic/system/user_maintenance', title: '用户维护', icon: 'usergroup-add',},
+                    {path: '/basic/system/role_maintenance', title: '角色维护', icon: 'usergroup-delete',}
                 ]
             },
-            {path: '/sub2/add', title: '添加', icon: 'zoom-in',},
-            {path: '/sub2/look', title: '查看', icon: 'zoom-in',},
+            {path: '/basic/add', title: '添加', icon: 'zoom-in',},
+            {path: '/basic/look', title: '查看', icon: 'zoom-in',},
         ]
     }
 ];

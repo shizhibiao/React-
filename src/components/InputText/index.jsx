@@ -10,7 +10,13 @@ export default class InputText extends React.Component {
             setValue: null
         }
     }
+
+    // componentDidUpdate() {
+    //     console.log(this.state.setValue)
+    // }
+
     onKeyUpHandle(e) {
+        // 匹配^和#，有则为空
         this.setState({setValue: e.target.value.replace(/\^|#/g,'')})
     }
     render() {
@@ -21,6 +27,7 @@ export default class InputText extends React.Component {
                 value={this.state.setValue}
                 type="text"
                 onChange={this.onKeyUpHandle.bind(this)}
+                style={this.props.style}
             />
         )
     }

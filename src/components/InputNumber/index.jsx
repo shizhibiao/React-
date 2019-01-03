@@ -35,6 +35,7 @@ export default class InputNumber extends React.Component {
                 type="number"
                 className="input-number"
                 onChange={this.onKeyUpHandle.bind(this)}
+                style={this.props.style}
             />
         )
     }

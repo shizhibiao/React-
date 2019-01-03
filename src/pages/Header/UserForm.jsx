@@ -76,14 +76,14 @@ const CollectionCreateForm = Form.create()(
                     <DateRange />
                   )}
                 </FormItem>
-                <FormItem label="开始号码" {...formItemLayout}>
+                <FormItem label="敏感符号" {...formItemLayout}>
                   {getFieldDecorator('stNo', {
                     initialValue:userInfo.stNo,
                   })(
                     <InputText />
                   )}
                 </FormItem>
-                <FormItem label="结束号码" {...formItemLayout}>
+                <FormItem label="数字选框" {...formItemLayout}>
                   {getFieldDecorator('endNo', {
                     initialValue:userInfo.endNo,
                   })(
