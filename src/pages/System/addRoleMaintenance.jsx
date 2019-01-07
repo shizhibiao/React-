@@ -2,6 +2,7 @@ import React from 'react';
 import {
     Drawer, Form, Button, Col, Row, Input, Select, DatePicker, Radio 
 } from 'antd';
+import Moment from 'moment'
 
 const { Option } = Select;
 const RadioGroup = Radio.Group;
@@ -30,7 +31,7 @@ const AddRoleMaintenance = Form.create()(
 
       render() {
         const { getFieldDecorator } = this.props.form;
-        let userInfo = this.props.userInfo? this.props.userInfo : {};
+        let userInfo = this.props.userInfo ? this.props.userInfo : {};
         const formItemLayout = {
             labelCol: {span: 13},
             wrapperCol: {span: 11},
@@ -48,21 +49,21 @@ const AddRoleMaintenance = Form.create()(
                         paddingBottom: '108px',
                     }}
                 >
-                {/* hideRequiredMark--隐藏所有表单项的必选标记 */}
+                {/* hideRequiredMark--隐藏所有表单项的必选标记 initialValue--初始值 */}
                 <Form layout="vertical" hideRequiredMark>
                     <Row gutter={16}>
                         <Col span={12}>
                             <Form.Item label="代码">
-                                {getFieldDecorator('name', {
-                                    initialValue:userInfo.name,
+                                {getFieldDecorator('code', {
+                                    initialValue:userInfo.code,
                                     rules: [{ required: true, message: '请输入' }],
                                 })(<Input placeholder="请输入" />)}
                             </Form.Item>
                         </Col>
                         <Col span={12}>
                             <Form.Item label="名称">
-                                {getFieldDecorator('url', {
-                                    initialValue:userInfo.url,
+                                {getFieldDecorator('name', {
+                                    initialValue:userInfo.name,
                                     rules: [{ required: true, message: '请输入' }],
                                 })(
                                     <Input placeholder="请输入"  />
@@ -73,8 +74,8 @@ const AddRoleMaintenance = Form.create()(
                     <Row gutter={16}>
                         <Col span={12}>
                             <Form.Item label="头菜单">
-                                {getFieldDecorator('owner', {
-                                    initialValue:userInfo.owner,
+                                {getFieldDecorator('first_menu', {
+                                    initialValue:userInfo.first_menu,
                                     rules: [{ required: true, message: '请选择' }],
                                 })(
                                     <Select placeholder="请选择">
@@ -85,9 +86,9 @@ const AddRoleMaintenance = Form.create()(
                             </Form.Item>
                         </Col>
                         <Col span={12}>
-                            <Form.Item label="测菜单">
-                                {getFieldDecorator('type', {
-                                    initialValue:userInfo.type,
+                            <Form.Item label="侧菜单">
+                                {getFieldDecorator('measuring_menu', {
+                                    initialValue:userInfo.measuring_menu,
                                     rules: [{ required: true, message: '请选择' }],
                                 })(
                                     <Select placeholder="请选择">
@@ -101,8 +102,8 @@ const AddRoleMaintenance = Form.create()(
                     <Row gutter={16}>
                         <Col span={12}>
                             <Form.Item label="安全等级">
-                                {getFieldDecorator('grade', {
-                                    initialValue:userInfo.grade,
+                                {getFieldDecorator('safety_level', {
+                                    initialValue:userInfo.safety_level,
                                     rules: [{ required: true, message: '请选择' }],
                                 })(
                                     <Select placeholder="请选择">
@@ -114,8 +115,8 @@ const AddRoleMaintenance = Form.create()(
                         </Col>
                         <Col span={12}>
                             <Form.Item label="主界面">
-                                {getFieldDecorator('approver', {
-                                    initialValue:userInfo.approver,
+                                {getFieldDecorator('main_interface', {
+                                    initialValue:userInfo.main_interface,
                                     rules: [{ required: true, message: '请选择' }],
                                 })(
                                     <Select placeholder="请选择">
@@ -129,8 +130,8 @@ const AddRoleMaintenance = Form.create()(
                     <Row gutter={16}>
                         <Col span={12}>
                             <Form.Item label="生效日期">
-                                {getFieldDecorator('dateTime', {
-                                    initialValue:userInfo.dateTime,
+                                {getFieldDecorator('effective_date', {
+                                    initialValue: userInfo.effective_date ? Moment(userInfo.effective_date) : null,
                                     rules: [{ required: true, message: '请选择' }],
                                 })(
                                     <DatePicker style={{width: '100%'}} />
@@ -139,8 +140,8 @@ const AddRoleMaintenance = Form.create()(
                         </Col>
                         <Col span={12}>
                             <Form.Item label="失效日期">
-                                {getFieldDecorator('DateInvalid', {
-                                    initialValue:userInfo.DateInvalid,
+                                {getFieldDecorator('expiry_date', {
+                                    initialValue: userInfo.expiry_date ? Moment(userInfo.expiry_date) : null,
                                     rules: [{ required: true, message: '请选择' }],
                                 })(
                                     <DatePicker style={{width: '100%'}} />
@@ -151,8 +152,8 @@ const AddRoleMaintenance = Form.create()(
                     <Row gutter={16}>
                         <Col span={12}>
                             <Form.Item label="超时时间">
-                                {getFieldDecorator('approver', {
-                                    initialValue:userInfo.approver,
+                                {getFieldDecorator('timeout', {
+                                    initialValue:userInfo.timeout,
                                     rules: [{ required: true, message: '请选择' }],
                                 })(
                                     <Input placeholder="请输入"  />
@@ -163,8 +164,8 @@ const AddRoleMaintenance = Form.create()(
                     <Row gutter={16}>
                         <Col span={12}>
                             <Form.Item label="是否允许全部医嘱" {...formItemLayout}>
-                                {getFieldDecorator('radioGroup1', {
-                                    initialValue:userInfo.radioGroup,
+                                {getFieldDecorator('medical_advice', {
+                                    initialValue:userInfo.medical_advice ? userInfo.medical_advice : '1',
                                 })(
                                     <RadioGroup>
                                         <Radio value="1">是</Radio>
@@ -175,8 +176,8 @@ const AddRoleMaintenance = Form.create()(
                         </Col>
                         <Col span={12}>
                             <Form.Item label="是否允许操作代码表" {...formItemLayout}>
-                                {getFieldDecorator('radioGroup2', {
-                                    initialValue:userInfo.radioGroup,
+                                {getFieldDecorator('code_table', {
+                                    initialValue:userInfo.code_table,
                                 })(
                                     <RadioGroup>
                                         <Radio value="1">是</Radio>
@@ -189,8 +190,8 @@ const AddRoleMaintenance = Form.create()(
                     <Row gutter={16}>
                         <Col span={12}>
                             <Form.Item label="是否允许向所有用户发消息" {...formItemLayout}>
-                                {getFieldDecorator('radioGroup3', {
-                                    initialValue:userInfo.radioGroup,
+                                {getFieldDecorator('information', {
+                                    initialValue:userInfo.information,
                                 })(
                                     <RadioGroup>
                                         <Radio value="1">是</Radio>
@@ -201,8 +202,8 @@ const AddRoleMaintenance = Form.create()(
                         </Col>
                         <Col span={12}>
                             <Form.Item label="是否允许界面编辑权限" {...formItemLayout} >
-                                {getFieldDecorator('radioGroup4', {
-                                    initialValue:userInfo.radioGroup,
+                                {getFieldDecorator('interface_permission', {
+                                    initialValue:userInfo.interface_permission,
                                 })(
                                     <RadioGroup>
                                         <Radio value="1">是</Radio>
@@ -215,7 +216,7 @@ const AddRoleMaintenance = Form.create()(
                     <Row gutter={16}>
                         <Col span={12}>
                             <Form.Item label="是否允许执行状态医嘱" {...formItemLayout}>
-                                {getFieldDecorator('radioGroup5', {
+                                {getFieldDecorator('state_advice', {
                                     initialValue:userInfo.radioGroup,
                                 })(
                                     <RadioGroup>
@@ -227,8 +228,8 @@ const AddRoleMaintenance = Form.create()(
                         </Col>
                         <Col span={12}>
                             <Form.Item label="是否允许列编辑权限" {...formItemLayout}>
-                                {getFieldDecorator('radioGroup6', {
-                                    initialValue:userInfo.radioGroup,
+                                {getFieldDecorator('list_permission', {
+                                    initialValue:userInfo.list_permission,
                                 })(
                                     <RadioGroup>
                                         <Radio value="1">是</Radio>

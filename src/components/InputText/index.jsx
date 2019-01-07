@@ -9,15 +9,14 @@ export default class InputText extends React.Component {
         this.state = {
             setValue: null
         }
+        this.onKeyUpHandle = this.onKeyUpHandle.bind(this);
     }
-
-    // componentDidUpdate() {
-    //     console.log(this.state.setValue)
-    // }
 
     onKeyUpHandle(e) {
         // 匹配^和#，有则为空
-        this.setState({setValue: e.target.value.replace(/\^|#/g,'')})
+        this.setState({setValue: e.target.value.replace(/\^|#/g,'')});
+        // 将值传给父组件
+        this.props.getData(e.target.value);
     }
     render() {
         const placeholder = this.props.placeholder ? this.props.placeholder : "";

@@ -24,6 +24,14 @@ const CollectionCreateForm = Form.create()(
         // console.log(this.props.userInfo)
       }
 
+      handleGetData = (newVal) => {
+        console.log(newVal)
+      }
+
+      getDataRange = (newVal) => {
+        console.log(newVal)
+      }
+
       render() {
         const {
           visible, onCancel, onCreate, form,
@@ -73,14 +81,15 @@ const CollectionCreateForm = Form.create()(
                   {getFieldDecorator('preFix', {
                     initialValue:userInfo.preFix,
                   })(
-                    <DateRange />
+                    <DateRange getDate={this.getDataRange} />
                   )}
                 </FormItem>
                 <FormItem label="敏感符号" {...formItemLayout}>
                   {getFieldDecorator('stNo', {
                     initialValue:userInfo.stNo,
                   })(
-                    <InputText />
+                    // 子传父获取到input框的值
+                    <InputText getData={this.handleGetData} />
                   )}
                 </FormItem>
                 <FormItem label="数字选框" {...formItemLayout}>

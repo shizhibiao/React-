@@ -17,12 +17,20 @@ export default class InputNumber extends React.Component {
         let {type} = this.props;
         if (type === 'positiveInt') {
             this.setState({setValue: e.target.value.replace(/^((-\d+)|(0+)|(\.\d+))$/g,'')})
+            // 将值传给父组件
+            this.props.getData(e.target.value);
         } else if (type === 'int') {
             this.setState({setValue: e.target.value.replace(/\./g,'')})
+            // 将值传给父组件
+            this.props.getData(e.target.value);
         } else if (type === 'float') {
             this.setState({setValue: e.target.value.replace(/\/[^(-?\\d+)(\\.\\d+)?$]/g,'')})
+            // 将值传给父组件
+            this.props.getData(e.target.value);
         } else {
             this.setState({setValue: e.target.value.replace(/\D/g,'')})
+            // 将值传给父组件
+            this.props.getData(e.target.value);
         }
         
     }

@@ -15,6 +15,12 @@ export default class DateRange extends React.Component {
             endOpen: false
         };
     }
+
+    // 监听state中属性的变化
+    componentWillUpdate(nextProps, nextState) {
+        // 将给变后的新值传给父组件
+        this.props.getDate(nextState)
+    }
     componentDidMount() {
         // 监听changeDate变化
         PubSub.subscribe("changeDate", (msg, data) => {
@@ -100,7 +106,7 @@ export default class DateRange extends React.Component {
             this.onChange('startValue', Moment().subtract(3, "days"));
             this.clickStartDate()
         }
-    }
+    }   
     // 一周前
     oneWeekBefore = () => {
         if (this.state.endValue) {
